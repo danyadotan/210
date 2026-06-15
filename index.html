@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAB@Work — Pitch</title>
+<style>
+  :root{
+    --navy:#0E1B33; --navy2:#16264A; --teal:#2BB6A3; --tealdk:#1C8C7E;
+    --ice:#CFE3F2; --paper:#F4F7FA; --ink:#1A2436; --mute:#5A6B82; --coral:#E8705A; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    background:#06101f;color:var(--ink);overflow:hidden;
+  }
+  .deck{position:fixed;inset:0}
+  .slide{
+    position:absolute;inset:0;display:none;flex-direction:column;
+    padding:6vh 7vw;opacity:0;transition:opacity .35s ease;
+  }
+  .slide.active{display:flex;opacity:1}
+  .slide.dark{background:var(--navy);color:var(--white)}
+  .slide.light{background:var(--paper);color:var(--ink)}
+  h1{font-size:clamp(34px,5.4vw,68px);font-weight:800;letter-spacing:-1px;line-height:1.04}
+  h2{font-size:clamp(24px,3.4vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.5px}
+  .tag{color:var(--teal);font-style:italic;font-size:clamp(16px,2vw,24px);margin-top:18px}
+  .sub{font-size:clamp(14px,1.5vw,18px);margin-top:14px}
+  .muted{color:var(--mute)}
+  .ice{color:var(--ice)}
+  .teal{color:var(--teal)}
+  .footer{position:absolute;left:7vw;bottom:5vh;font-size:13px;color:var(--mute)}
+  .contact{position:absolute;left:7vw;bottom:9vh;font-size:clamp(14px,1.5vw,17px);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .contact a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(43,182,163,.4);padding-bottom:2px;transition:.2s}
+  .contact a:hover{border-bottom-color:var(--teal)}
+  .contact .dot{color:var(--mute)}
+
+  /* cinematic video slides */
+  .slide.cine{padding:0;overflow:hidden;background:#000}
+  .slide.cine video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .slide.cine .scrim{position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(6,16,31,.55) 0%,rgba(6,16,31,.20) 40%,rgba(6,16,31,.75) 100%)}
+  .slide.cine .vtext{position:relative;z-index:2;margin:auto;padding:6vh 8vw;width:100%}
+  .slide.cine .kicker{color:var(--teal);font-size:clamp(13px,1.4vw,16px);font-weight:700;
+    letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
+  .slide.cine h1,.slide.cine h2{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+  .slide.cine .vsub{color:#fff;font-size:clamp(16px,1.9vw,22px);margin-top:18px;line-height:1.4;
+    max-width:32em;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+  .soundbtn{position:absolute;bottom:26px;left:26px;z-index:5;background:rgba(0,0,0,.45);
+    color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:30px;padding:8px 16px;
+    font-size:13px;cursor:pointer;backdrop-filter:blur(4px)}
+  .soundbtn:hover{background:rgba(43,182,163,.6)}
+  .src{position:absolute;left:7vw;bottom:4vh;font-size:11px;font-style:italic;color:var(--mute)}
+
+  /* stat row */
+  .stats{display:flex;gap:2.5vw;margin-top:5vh}
+  .stat{flex:1;background:var(--white);border-radius:16px;padding:30px 22px;text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.10)}
+  .stat .big{font-size:clamp(34px,4.6vw,52px);font-weight:800;color:var(--tealdk);line-height:1}
+  .stat .lbl{font-size:14px;color:var(--mute);margin-top:14px;line-height:1.3}
+  .stat .ic{font-size:30px;margin-bottom:8px}
+  .lead{margin-top:5vh;font-size:clamp(15px,1.7vw,20px);line-height:1.5;max-width:62em}
+
+  /* two columns */
+  .cols{display:flex;gap:2.5vw;margin-top:4vh;flex:1}
+  .col{flex:1;background:var(--navy2);border-radius:16px;padding:34px;display:flex;flex-direction:column;
+    box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .col .ch{display:flex;align-items:center;gap:14px;font-size:clamp(18px,2.2vw,24px);font-weight:800}
+  .col .cb{margin-top:auto;margin-bottom:auto;font-size:clamp(14px,1.6vw,19px);line-height:1.4;color:var(--ice)}
+  .col .cf{font-style:italic;color:var(--teal);font-size:15px}
+  .arrow{font-size:30px}
+
+  /* compare (light) */
+  .cmp{display:flex;gap:2.5vw;margin-top:4vh;flex:1}
+  .cmp .box{flex:1;border-radius:16px;padding:34px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+  .cmp .market{background:var(--white)}
+  .cmp .ours{background:var(--navy);color:var(--ice)}
+  .cmp h3{font-size:20px;margin-bottom:18px}
+  .cmp .market h3{color:var(--mute)} .cmp .ours h3{color:var(--teal)}
+  .cmp ul{list-style:none} .cmp li{padding:9px 0;font-size:clamp(14px,1.5vw,18px);position:relative;padding-left:20px}
+  .cmp li:before{content:"";position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .cmp .market li:before{background:var(--mute)}
+  .cmp .em{font-style:italic}
+
+  /* funnel */
+  .funnel{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:4vh;flex:1;justify-content:center}
+  .fl{background:var(--navy2);border-radius:14px;padding:20px 28px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .fl .fh{color:var(--teal);font-weight:800;font-size:clamp(15px,1.7vw,19px)}
+  .fl .fb{color:var(--ice);font-size:clamp(13px,1.4vw,15px);margin-top:6px;line-height:1.3}
+
+  /* traction */
+  .hero{background:var(--navy2);border-radius:16px;padding:30px 34px;margin-top:4vh;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .hero .ht{font-size:clamp(17px,2vw,23px);line-height:1.3}
+  .hero .hb{color:var(--ice);font-size:15px;margin-top:12px;line-height:1.4}
+  .sigs{display:flex;gap:2vw;margin-top:3vh}
+  .sig{flex:1;background:var(--navy2);border-radius:12px;padding:22px;font-size:14px;color:var(--ice);line-height:1.4;
+    box-shadow:0 8px 24px rgba(0,0,0,.18)}
+
+  /* founder goals */
+  .panel{background:var(--white);border-radius:16px;padding:30px 34px;margin-top:3vh;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+  .panel .pt{font-size:clamp(16px,1.8vw,21px);line-height:1.4}
+  .goals{display:flex;gap:2vw;margin-top:2.5vh}
+  .goal{flex:1;background:var(--white);border-radius:12px;padding:20px;font-size:14px;line-height:1.4;
+    box-shadow:0 8px 24px rgba(0,0,0,.12)}
+
+  /* nav */
+  .nav{position:fixed;bottom:22px;right:26px;display:flex;gap:10px;z-index:20}
+  .nav button{background:rgba(43,182,163,.15);color:var(--teal);border:1px solid var(--teal);
+    width:42px;height:42px;border-radius:50%;font-size:18px;cursor:pointer;transition:.2s}
+  .nav button:hover{background:var(--teal);color:var(--navy)}
+  .count{position:fixed;bottom:30px;left:26px;color:var(--mute);font-size:13px;z-index:20}
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal);transition:width .3s;z-index:30}
+  @media (max-width:760px){
+    .stats,.cols,.cmp,.sigs,.goals{flex-direction:column}
+    .slide{padding:5vh 6vw}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="deck" id="deck">
+
+  <!-- 0 COLD OPEN — typewriter -->
+  <section class="slide cine active">
+    <video src="v1-typewriter.mp4" autoplay muted loop playsinline></video>
+    <div class="scrim"></div>
+    <div class="vtext">
+      <div class="kicker">Another typical day at the office</div>
+      <h1 style="font-size:clamp(32px,5vw,64px)">The work keeps coming.<br>The person keeps absorbing it.</h1>
+      <p class="vsub">Faster tools. More paper. The load never lands anywhere — it just piles up on whoever's sitting at the desk.</p>
+    </div>
+  </section>
+
+  <!-- 1 TITLE -->
+  <section class="slide dark">
+    <div style="margin-top:14vh">
+      <h1>TAB@Work</h1>
+      <div class="tag">The AI that shows up at the moment work breaks — not after.</div>
+      <div class="sub ice">An ambient AI execution layer for the enterprise. <b>Maximal AI use, fully governed.</b></div>
+    </div>
+    <div class="footer">Bridge-iT · Founder &amp; Systems Architect</div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="slide light">
+    <h2>Everyone is adopting AI. No one is asking what it does to the person using it.</h2>
+    <div class="stats">
+      <div class="stat"><div class="ic">⚠️</div><div class="big">56–80%</div><div class="lbl">of employees already use unauthorized AI at work</div></div>
+      <div class="stat"><div class="ic">✋</div><div class="big">~46%</div><div class="lbl">would keep using it even if it were banned</div></div>
+      <div class="stat"><div class="ic">🔒</div><div class="big">$4.2M</div><div class="lbl">average cost of a shadow-AI data breach</div></div>
+    </div>
+    <p class="lead">An employee hits friction, goes into survival mode, and reaches for a private ChatGPT or Claude. <b class="teal">It isn't a policy violation — it's a coping mechanism.</b> You can't block your way out of a survival instinct.</p>
+    <div class="src">Sources: IDC 2025; Software AG; shadow-AI breach cost (industry aggregate).</div>
+  </section>
+
+  <!-- 3 TWO-SIDED -->
+  <section class="slide dark">
+    <h2>The same survival reflex — at both ends</h2>
+    <div class="tag" style="margin-top:10px">The amygdala doesn't check your title before it freezes, fights, fawns, or flees.</div>
+    <div class="cols">
+      <div class="col">
+        <div class="ch"><span class="arrow" style="color:var(--coral)">↓</span> From below</div>
+        <div class="cb">The employee, under stress, shame, and overload — quietly reaching for a private chatbot to survive the day.</div>
+        <div class="cf">Coping out of fear of falling behind.</div>
+      </div>
+      <div class="col">
+        <div class="ch"><span class="arrow" style="color:var(--coral)">↑</span> From above</div>
+        <div class="cb">Leadership, under its own pressure to be seen moving on AI, hands out tokens and “build your own agent” — and calls it innovation.</div>
+        <div class="cf">Coping out of the need to align and be validated.</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-weight:700;margin-top:3vh;font-size:clamp(15px,1.7vw,19px)">Both look like progress. Both leave the organization unable to see what it's actually running on.</p>
+  </section>
+
+  <!-- 4 PANIC STORY -->
+  <section class="slide light">
+    <h2>What enterprises do when they're afraid</h2>
+    <div class="panel" style="margin-top:4vh">
+      <p class="pt">A NASDAQ-listed enterprise, under real market strain and with no settled plan for how AI should land inside the company, went all-in overnight: <b>every employee — technical or not — handed the power to build their own agents.</b> Framed as empowerment. But when people aren't equipped to know what serves them, and no one tracks which builds are useful or even used, “build your own solution” is just the survival reflex one level up.</p>
+    </div>
+    <p style="text-align:center;font-size:clamp(20px,2.6vw,30px);font-weight:800;color:var(--tealdk);margin-top:3.5vh">The name doesn't matter — that's the point.</p>
+    <p style="text-align:center;max-width:60em;margin:2vh auto 0;font-size:clamp(15px,1.6vw,18px);line-height:1.5">This isn't one company's mistake. It's a law of behavior under threat. You can assemble the best models, the most compute, a thousand agents — none of it counts until one human finds one useful, walks over, and makes a single gesture toward it. That gesture is the only thing that was ever real.</p>
+  </section>
+
+  <!-- 4.5 WINGMAN — secretary -->
+  <section class="slide cine">
+    <video src="v2-secretary.mp4" autoplay muted loop playsinline></video>
+    <div class="scrim"></div>
+    <div class="vtext">
+      <div class="kicker">An employee's wingman, all workday long</div>
+      <h2 style="max-width:18em">She doesn't need another system to feed. She needs something on her side of the desk.</h2>
+      <p class="vsub">Bought by management. Private to the employee. It protects the person's agency and the company's data at the same time — and within safe, regulated boundaries, that becomes a new layer of trust.</p>
+    </div>
+  </section>
+
+  <!-- 5 SOLUTION FUNNEL -->
+  <section class="slide dark">
+    <h2>TAB@Work: built for the human in that moment</h2>
+    <div class="funnel">
+      <div class="fl" style="width:55%">
+        <div class="fh">☁ Management — the “Weather Report”</div>
+        <div class="fb">Anonymized, system-level signal only. Not who slowed the pipeline — where the system is overloaded.</div>
+      </div>
+      <div class="fl" style="width:75%">
+        <div class="fh">◉ The choke point — anonymous by architecture</div>
+        <div class="fb">Identities stripped before anything moves up. Cross-department coordination happens here.</div>
+      </div>
+      <div class="fl" style="width:95%">
+        <div class="fh">🛡 Employee — personal agents, loyal to the individual</div>
+        <div class="fb">Protect focus, lower the cognitive load that triggers the reflex. Data never leaves the tab.</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-style:italic;color:var(--ice);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Data flows up and dissolves into anonymity. Resources flow back down. Leadership sees the system; it never sees the person.</p>
+  </section>
+
+  <!-- 6 DIFFERENTIATION -->
+  <section class="slide light">
+    <h2>Everyone else treats the symptom. We treat the cause.</h2>
+    <div class="cmp">
+      <div class="box market">
+        <h3>The market</h3>
+        <ul>
+          <li>Monitors the individual</li>
+          <li>Blocking, DLP, surveillance</li>
+          <li>Treats shadow AI as a discipline problem</li>
+          <li>Asks: who slowed the pipeline?</li>
+          <li class="em">“Feed the system to protect yourself”</li>
+        </ul>
+      </div>
+      <div class="box ours">
+        <h3>TAB@Work</h3>
+        <ul>
+          <li>Protects the individual</li>
+          <li>Removes the load that drives leakage</li>
+          <li>Treats shadow AI as a symptom</li>
+          <li>Asks: where is the system overloaded?</li>
+          <li class="em teal">“Fix systems, not people”</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;font-style:italic;color:var(--mute);margin-top:2.5vh;font-size:clamp(13px,1.4vw,16px)">Our axis isn't “who do we monitor” — it's “how do we remove the load that pushes the employee out the door in the first place.”</p>
+  </section>
+
+  <!-- 7 TRACTION -->
+  <section class="slide dark">
+    <h2>We're live</h2>
+    <div class="hero">
+      <div class="ht">🏢 <b>Enterprise pilots through Tikshoov</b>, a national BPO — with frontline workers at <b class="teal">Nespresso</b> and <b class="teal">Israel Electric</b>.</div>
+      <div class="hb">Field research on-site (stratified sampling, functional analysis per location) surfaced the exact friction points the product now targets — escalation in the call center identified as the killer use case.</div>
+    </div>
+    <div class="sigs">
+      <div class="sig">Selected for the <b>Dial hackathon</b> — testing an AI agent with an autonomous phone number (direct to our call-center use case).</div>
+      <div class="sig">Selected for <b>Cerebral Valley's</b> 24-hr Physical AI cohort, Paris — Tech Week, July 2026.</div>
+      <div class="sig">Author of <b>“Adaptive Human Infrastructure for AI-Native Environments,”</b> submitted to Israel's Innovation Authority consultation.</div>
+    </div>
+    <p style="text-align:center;font-style:italic;color:var(--teal);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Solo founder + a live national-BPO pilot beats a two-person team with an idea.</p>
+  </section>
+
+  <!-- 8 FOUNDER -->
+  <section class="slide light">
+    <h2>Why me</h2>
+    <div class="panel">
+      <p class="pt"><b class="teal">I didn't study this problem — I lived it.</b> A decade of CBT practice specializing in executive function, watching the gap between knowing what to do and being able to start. TAB@Work is that clinical insight turned into enterprise infrastructure — built bottom-up from the human, before the industry had the vocabulary for it.</p>
+      <p class="muted" style="margin-top:14px;font-size:14px;line-height:1.4">I work in both registers — the neuroscience of cognitive load and the system architecture that addresses it. Solo founder by design; Ira Dotan supports legal &amp; regulatory and steps into a formal role as the stage justifies it.</p>
+    </div>
+    <h3 style="margin-top:3vh;font-size:clamp(17px,1.9vw,22px)">Next 6 months</h3>
+    <div class="goals">
+      <div class="goal">Convert the Tikshoov pilot into a paid contract + referenceable case study.</div>
+      <div class="goal">Ship the core product: personal agents + the anonymous Weather Report.</div>
+      <div class="goal">Land 1–2 more design partners and raise a pre-seed round.</div>
+    </div>
+  </section>
+
+  <!-- 8.5 EFFICIENCY — treadmill -->
+  <section class="slide cine">
+    <video id="treadVid" src="v3-treadmill.mp4" autoplay muted loop playsinline></video>
+    <div class="scrim"></div>
+    <div class="vtext">
+      <div class="kicker">Let's talk about efficiency</div>
+      <h1 style="font-size:clamp(34px,5.5vw,72px)">Efficiency isn't<br>moving faster.</h1>
+      <p class="vsub">It's not running harder in the same place. It's removing the load that made the running necessary. That's the difference between motion and progress — and it's the whole point of TAB@Work.</p>
+    </div>
+    <button class="soundbtn" id="soundToggle" onclick="toggleSound(event)">🔇 Tap for sound</button>
+  </section>
+
+  <!-- 9 CLOSE -->
+  <section class="slide dark">
+    <div style="margin-top:16vh">
+      <h1 style="font-size:clamp(30px,4.4vw,52px)">Every company will run on AI.</h1>
+      <p class="ice" style="font-size:clamp(17px,2.1vw,24px);margin-top:20px;line-height:1.35;max-width:30em">TAB@Work is the layer that makes it humane, governed, and safe — for the employee and the enterprise at once.</p>
+      <p class="teal" style="font-style:italic;margin-top:22px;font-size:clamp(15px,1.7vw,19px)">The problem was never the technology. It's the human condition. The solution is, literally, in their hands.</p>
+    </div>
+    <div class="contact">
+      <a href="mailto:danya@dynamicbridge.io">danya@dynamicbridge.io</a>
+      <span class="dot">·</span>
+      <a href="https://www.linkedin.com/in/danya-dotan" target="_blank" rel="noopener">linkedin.com/in/danya-dotan</a>
+    </div>
+    <div class="footer">Bridge-iT · TAB@Work · Founder &amp; Systems Architect</div>
+  </section>
+
+</div>
+
+<div class="count" id="count">1 / 9</div>
+<div class="nav">
+  <button onclick="go(-1)">‹</button>
+  <button onclick="go(1)">›</button>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  function render(){
+    slides.forEach((s,n)=>{
+      const on = n===i;
+      s.classList.toggle('active',on);
+      const v = s.querySelector('video');
+      if(v){
+        if(on){ v.currentTime=0; v.play().catch(()=>{}); }
+        else { v.pause(); }
+      }
+    });
+    document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('prog').style.width=((i+1)/slides.length*100)+'%';
+  }
+  function go(d){i=Math.max(0,Math.min(slides.length-1,i+d));render();}
+  function toggleSound(e){
+    e.stopPropagation();
+    const v=document.getElementById('treadVid');
+    const b=document.getElementById('soundToggle');
+    v.muted=!v.muted;
+    b.textContent = v.muted ? '🔇 Tap for sound' : '🔊 Sound on';
+    if(!v.muted) v.play().catch(()=>{});
+  }
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' ')go(1);
+    if(e.key==='ArrowLeft')go(-1);
+  });
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('.nav'))return;
+    if(e.target.closest('a'))return;
+    if(e.target.closest('.soundbtn'))return;
+    go(1);
+  });
+  render();
+</script>
+</body>
+</html>

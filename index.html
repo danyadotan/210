@@ -104,6 +104,18 @@
   .goal{flex:1;background:var(--white);border-radius:12px;padding:20px;font-size:14px;line-height:1.4;
     box-shadow:0 8px 24px rgba(0,0,0,.12)}
 
+  /* product demo */
+  .demo-grid{display:flex;gap:2vw;margin-top:3vh;flex:1;align-items:flex-start}
+  .demo-left{flex:0 0 27%;display:flex;flex-direction:column}
+  .demo-right{flex:1;display:flex;flex-direction:column;gap:1.5vh}
+  .demo-label{color:var(--teal);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+  .demo-screen{border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+  .demo-screen img{width:100%;display:block}
+  /* funnel arrows */
+  .funnel-arrow{color:var(--teal);opacity:.5;font-size:18px;text-align:center;line-height:1;margin:2px 0;flex-shrink:0}
+  /* sig card accent */
+  .sig{border-left:3px solid var(--teal)}
+
   /* nav */
   .nav{position:fixed;bottom:22px;right:26px;display:flex;gap:10px;z-index:20}
   .nav button{background:rgba(43,182,163,.15);color:var(--teal);border:1px solid var(--teal);
@@ -162,6 +174,10 @@
     .slide-sub-large{font-size:14px!important;margin-top:14px!important}
     .slide-h3{font-size:15px!important;margin-top:2vh!important}
     .tag{font-size:13px;margin-top:10px}
+    /* demo slide */
+    .demo-grid{flex-direction:column;gap:12px}
+    .demo-left,.demo-right{flex:none;width:100%}
+    .demo-label{font-size:10px;margin-bottom:6px}
     /* fixed chrome */
     .title-body{margin-top:5vh}
     .close-body{margin-top:6vh}
@@ -254,21 +270,50 @@
   <!-- 5 SOLUTION FUNNEL -->
   <section class="slide dark">
     <h2>TAB@Work: built for the human in that moment</h2>
-    <div class="funnel">
-      <div class="fl" style="width:55%">
-        <div class="fh">☁ Management — the “Weather Report”</div>
-        <div class="fb">Anonymized, system-level signal only. Not who slowed the pipeline — where the system is overloaded.</div>
+    <div class=”funnel”>
+      <div class=”fl” style=”width:55%”>
+        <div class=”fh”>☁ Management — the “Weather Report”</div>
+        <div class=”fb”>Anonymized, system-level signal only. Not who slowed the pipeline — where the system is overloaded.</div>
       </div>
-      <div class="fl" style="width:75%">
-        <div class="fh">◉ The choke point — anonymous by architecture</div>
-        <div class="fb">Identities stripped before anything moves up. Cross-department coordination happens here.</div>
+      <div class=”funnel-arrow”>▼</div>
+      <div class=”fl” style=”width:75%”>
+        <div class=”fh”>◉ The choke point — anonymous by architecture</div>
+        <div class=”fb”>Identities stripped before anything moves up. Cross-department coordination happens here.</div>
       </div>
-      <div class="fl" style="width:95%">
-        <div class="fh">🛡 Employee — personal agents, loyal to the individual</div>
-        <div class="fb">Protect focus, lower the cognitive load that triggers the reflex. Data never leaves the tab.</div>
+      <div class=”funnel-arrow”>▼</div>
+      <div class=”fl” style=”width:95%”>
+        <div class=”fh”>🛡 Employee — personal agents, loyal to the individual</div>
+        <div class=”fb”>Protect focus, lower the cognitive load that triggers the reflex. Data never leaves the tab.</div>
       </div>
     </div>
     <p class="slide-caption" style="text-align:center;font-style:italic;color:var(--ice);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Data flows up and dissolves into anonymity. Resources flow back down. Leadership sees the system; it never sees the person.</p>
+  </section>
+
+  <!-- 5.5 PRODUCT DEMO -->
+  <section class="slide dark">
+    <h2>The experience, inside the tab</h2>
+    <div class="demo-grid">
+      <div class="demo-left">
+        <div class="demo-label">Personal agent — mobile</div>
+        <div class="demo-screen">
+          <img src="demo-mobile.jpeg" alt="Agent task cards on mobile">
+        </div>
+      </div>
+      <div class="demo-right">
+        <div>
+          <div class="demo-label">Agent pipeline — desktop</div>
+          <div class="demo-screen">
+            <img src="demo-pipeline.jpeg" alt="Agent task pipeline on desktop">
+          </div>
+        </div>
+        <div>
+          <div class="demo-label">Meeting prep — one tap</div>
+          <div class="demo-screen">
+            <img src="demo-chat.jpeg" alt="AI meeting prep assistant">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- 6 DIFFERENTIATION -->

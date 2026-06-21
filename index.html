@@ -113,7 +113,32 @@
   .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal);transition:width .3s;z-index:30}
   @media (max-width:760px){
     .stats,.cols,.cmp,.sigs,.goals{flex-direction:column}
-    .slide{padding:5vh 6vw}
+    .slide{padding:4vh 5vw;padding-bottom:74px;overflow-y:auto}
+    .slide.cine{padding:0;overflow:hidden}
+    .stat{padding:16px 14px}
+    .stat .big{font-size:clamp(26px,8vw,40px)}
+    .stat .lbl{font-size:13px;margin-top:10px}
+    .stat .ic{font-size:22px;margin-bottom:6px}
+    .lead{margin-top:3vh;font-size:clamp(13px,4vw,16px)}
+    .col{padding:22px}
+    .fl{padding:14px 18px}
+    .hero{padding:20px 22px;margin-top:2vh}
+    .sig{padding:16px}
+    .panel{padding:20px 22px;margin-top:2vh}
+    .goal{padding:14px}
+    .title-body{margin-top:6vh}
+    .close-body{margin-top:8vh}
+    .footer{bottom:74px;font-size:12px}
+    .contact{bottom:74px;font-size:13px}
+    .src{bottom:74px;font-size:10px}
+    .nav{bottom:14px;right:14px;gap:8px}
+    .nav button{width:36px;height:36px;font-size:15px}
+    .count{bottom:20px;left:14px;font-size:12px}
+    h1{font-size:clamp(26px,7vw,46px)}
+    h2{font-size:clamp(18px,5.5vw,30px)}
+    .stats{margin-top:3vh;gap:12px}
+    .cols,.cmp,.sigs,.goals{margin-top:2vh;gap:12px}
+    .funnel{gap:10px;margin-top:2vh}
   }
 </style>
 </head>
@@ -134,7 +159,7 @@
 
   <!-- 1 TITLE -->
   <section class="slide dark">
-    <div style="margin-top:14vh">
+    <div class="title-body" style="margin-top:14vh">
       <h1>TAB@Work</h1>
       <div class="tag">The AI that shows up at the moment work breaks — not after.</div>
       <div class="sub ice">An ambient AI execution layer for the enterprise. <b>Maximal AI use, fully governed.</b></div>
@@ -286,7 +311,7 @@
 
   <!-- 9 CLOSE -->
   <section class="slide dark">
-    <div style="margin-top:16vh">
+    <div class="close-body" style="margin-top:16vh">
       <h1 style="font-size:clamp(30px,4.4vw,52px)">Every company will run on AI.</h1>
       <p class="ice" style="font-size:clamp(17px,2.1vw,24px);margin-top:20px;line-height:1.35;max-width:30em">TAB@Work is the layer that makes it humane, governed, and safe — for the employee and the enterprise at once.</p>
       <p class="teal" style="font-style:italic;margin-top:22px;font-size:clamp(15px,1.7vw,19px)">The problem was never the technology. It's the human condition. The solution is, literally, in their hands.</p>

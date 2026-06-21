@@ -104,6 +104,18 @@
   .goal{flex:1;background:var(--white);border-radius:12px;padding:20px;font-size:14px;line-height:1.4;
     box-shadow:0 8px 24px rgba(0,0,0,.12)}
 
+  /* product demo */
+  .demo-grid{display:flex;gap:2vw;margin-top:3vh;flex:1;align-items:flex-start}
+  .demo-left{flex:0 0 27%;display:flex;flex-direction:column}
+  .demo-right{flex:1;display:flex;flex-direction:column;gap:1.5vh}
+  .demo-label{color:var(--teal);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+  .demo-screen{border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+  .demo-screen img{width:100%;display:block}
+  /* funnel arrows */
+  .funnel-arrow{color:var(--teal);opacity:.5;font-size:18px;text-align:center;line-height:1;margin:2px 0;flex-shrink:0}
+  /* sig card accent */
+  .sig{border-left:3px solid var(--teal)}
+
   /* nav */
   .nav{position:fixed;bottom:22px;right:26px;display:flex;gap:10px;z-index:20}
   .nav button{background:rgba(43,182,163,.15);color:var(--teal);border:1px solid var(--teal);
@@ -112,33 +124,69 @@
   .count{position:fixed;bottom:30px;left:26px;color:var(--mute);font-size:13px;z-index:20}
   .progress{position:fixed;top:0;left:0;height:3px;background:var(--teal);transition:width .3s;z-index:30}
   @media (max-width:760px){
+    /* layout */
     .stats,.cols,.cmp,.sigs,.goals{flex-direction:column}
-    .slide{padding:4vh 5vw;padding-bottom:74px;overflow-y:auto}
+    .slide{padding:3vh 5vw;padding-bottom:70px;overflow-y:auto}
     .slide.cine{padding:0;overflow:hidden}
-    .stat{padding:16px 14px}
-    .stat .big{font-size:clamp(26px,8vw,40px)}
-    .stat .lbl{font-size:13px;margin-top:10px}
-    .stat .ic{font-size:22px;margin-bottom:6px}
-    .lead{margin-top:3vh;font-size:clamp(13px,4vw,16px)}
-    .col{padding:22px}
-    .fl{padding:14px 18px}
-    .hero{padding:20px 22px;margin-top:2vh}
-    .sig{padding:16px}
-    .panel{padding:20px 22px;margin-top:2vh}
-    .goal{padding:14px}
-    .title-body{margin-top:6vh}
-    .close-body{margin-top:8vh}
-    .footer{bottom:74px;font-size:12px}
-    .contact{bottom:74px;font-size:13px}
-    .src{bottom:74px;font-size:10px}
-    .nav{bottom:14px;right:14px;gap:8px}
-    .nav button{width:36px;height:36px;font-size:15px}
-    .count{bottom:20px;left:14px;font-size:12px}
-    h1{font-size:clamp(26px,7vw,46px)}
-    h2{font-size:clamp(18px,5.5vw,30px)}
-    .stats{margin-top:3vh;gap:12px}
-    .cols,.cmp,.sigs,.goals{margin-top:2vh;gap:12px}
-    .funnel{gap:10px;margin-top:2vh}
+    h1{font-size:clamp(22px,6.5vw,40px)}
+    h2{font-size:clamp(16px,5vw,26px)}
+    /* stat cards */
+    .stats{margin-top:2vh;gap:8px}
+    .stat{padding:12px 10px}
+    .stat .big{font-size:clamp(22px,7vw,34px)}
+    .stat .lbl{font-size:11px;margin-top:7px}
+    .stat .ic{font-size:18px;margin-bottom:4px}
+    /* lead text */
+    .lead{margin-top:2vh;font-size:13px;line-height:1.5}
+    /* two-col */
+    .cols{margin-top:2vh;gap:8px}
+    .col{padding:16px}
+    .col .ch{font-size:15px;gap:10px}
+    .col .cb{font-size:13px;line-height:1.4}
+    .col .cf{font-size:12px}
+    /* funnel */
+    .funnel{gap:8px;margin-top:2vh}
+    .funnel .fl{width:100%!important}
+    .fl{padding:11px 14px}
+    .fl .fh{font-size:13px}
+    .fl .fb{font-size:12px;margin-top:3px}
+    /* compare */
+    .cmp{margin-top:2vh;gap:8px}
+    .cmp h3{font-size:15px;margin-bottom:10px}
+    .cmp li{font-size:13px;padding:6px 0;padding-left:16px}
+    /* traction */
+    .hero{padding:14px 16px;margin-top:2vh}
+    .hero .ht{font-size:13px;line-height:1.4}
+    .hero .hb{font-size:12px;margin-top:6px;line-height:1.4}
+    .sigs{margin-top:2vh;gap:8px}
+    .sig{padding:12px;font-size:12px;line-height:1.4}
+    /* founder */
+    .panel{padding:16px 18px;margin-top:2vh}
+    .panel .pt{font-size:13px;line-height:1.5}
+    .panel .muted{font-size:12px!important;margin-top:10px!important}
+    .goals{margin-top:1.5vh;gap:8px}
+    .goal{padding:11px;font-size:12px;line-height:1.4}
+    /* inline-style overrides */
+    .slide-pullquote{font-size:16px!important;margin-top:2vh!important}
+    .slide-body{font-size:13px!important;max-width:100%!important;margin-top:1.5vh!important}
+    .slide-tagline{font-size:13px!important;margin-top:1.5vh!important}
+    .slide-caption{font-size:12px!important;margin-top:1.5vh!important}
+    .slide-sub-large{font-size:14px!important;margin-top:14px!important}
+    .slide-h3{font-size:15px!important;margin-top:2vh!important}
+    .tag{font-size:13px;margin-top:10px}
+    /* demo slide */
+    .demo-grid{flex-direction:column;gap:12px}
+    .demo-left,.demo-right{flex:none;width:100%}
+    .demo-label{font-size:10px;margin-bottom:6px}
+    /* fixed chrome */
+    .title-body{margin-top:5vh}
+    .close-body{margin-top:6vh}
+    .footer{bottom:70px;font-size:11px}
+    .contact{bottom:70px;font-size:12px;gap:8px}
+    .src{bottom:70px;font-size:10px}
+    .nav{bottom:12px;right:12px;gap:8px}
+    .nav button{width:34px;height:34px;font-size:14px}
+    .count{bottom:18px;left:12px;font-size:11px}
   }
 </style>
 </head>
@@ -195,7 +243,7 @@
         <div class="cf">Coping out of the need to align and be validated.</div>
       </div>
     </div>
-    <p style="text-align:center;font-weight:700;margin-top:3vh;font-size:clamp(15px,1.7vw,19px)">Both look like progress. Both leave the organization unable to see what it's actually running on.</p>
+    <p class="slide-tagline" style="text-align:center;font-weight:700;margin-top:3vh;font-size:clamp(15px,1.7vw,19px)">Both look like progress. Both leave the organization unable to see what it's actually running on.</p>
   </section>
 
   <!-- 4 PANIC STORY -->
@@ -204,8 +252,8 @@
     <div class="panel" style="margin-top:4vh">
       <p class="pt">A NASDAQ-listed enterprise, under real market strain and with no settled plan for how AI should land inside the company, went all-in overnight: <b>every employee — technical or not — handed the power to build their own agents.</b> Framed as empowerment. But when people aren't equipped to know what serves them, and no one tracks which builds are useful or even used, “build your own solution” is just the survival reflex one level up.</p>
     </div>
-    <p style="text-align:center;font-size:clamp(20px,2.6vw,30px);font-weight:800;color:var(--tealdk);margin-top:3.5vh">The name doesn't matter — that's the point.</p>
-    <p style="text-align:center;max-width:60em;margin:2vh auto 0;font-size:clamp(15px,1.6vw,18px);line-height:1.5">This isn't one company's mistake. It's a law of behavior under threat. You can assemble the best models, the most compute, a thousand agents — none of it counts until one human finds one useful, walks over, and makes a single gesture toward it. That gesture is the only thing that was ever real.</p>
+    <p class="slide-pullquote" style="text-align:center;font-size:clamp(20px,2.6vw,30px);font-weight:800;color:var(--tealdk);margin-top:3.5vh">The name doesn't matter — that's the point.</p>
+    <p class="slide-body" style="text-align:center;max-width:60em;margin:2vh auto 0;font-size:clamp(15px,1.6vw,18px);line-height:1.5">This isn't one company's mistake. It's a law of behavior under threat. You can assemble the best models, the most compute, a thousand agents — none of it counts until one human finds one useful, walks over, and makes a single gesture toward it. That gesture is the only thing that was ever real.</p>
   </section>
 
   <!-- 4.5 WINGMAN — secretary -->
@@ -222,21 +270,50 @@
   <!-- 5 SOLUTION FUNNEL -->
   <section class="slide dark">
     <h2>TAB@Work: built for the human in that moment</h2>
-    <div class="funnel">
-      <div class="fl" style="width:55%">
-        <div class="fh">☁ Management — the “Weather Report”</div>
-        <div class="fb">Anonymized, system-level signal only. Not who slowed the pipeline — where the system is overloaded.</div>
+    <div class=”funnel”>
+      <div class=”fl” style=”width:55%”>
+        <div class=”fh”>☁ Management — the “Weather Report”</div>
+        <div class=”fb”>Anonymized, system-level signal only. Not who slowed the pipeline — where the system is overloaded.</div>
       </div>
-      <div class="fl" style="width:75%">
-        <div class="fh">◉ The choke point — anonymous by architecture</div>
-        <div class="fb">Identities stripped before anything moves up. Cross-department coordination happens here.</div>
+      <div class=”funnel-arrow”>▼</div>
+      <div class=”fl” style=”width:75%”>
+        <div class=”fh”>◉ The choke point — anonymous by architecture</div>
+        <div class=”fb”>Identities stripped before anything moves up. Cross-department coordination happens here.</div>
       </div>
-      <div class="fl" style="width:95%">
-        <div class="fh">🛡 Employee — personal agents, loyal to the individual</div>
-        <div class="fb">Protect focus, lower the cognitive load that triggers the reflex. Data never leaves the tab.</div>
+      <div class=”funnel-arrow”>▼</div>
+      <div class=”fl” style=”width:95%”>
+        <div class=”fh”>🛡 Employee — personal agents, loyal to the individual</div>
+        <div class=”fb”>Protect focus, lower the cognitive load that triggers the reflex. Data never leaves the tab.</div>
       </div>
     </div>
-    <p style="text-align:center;font-style:italic;color:var(--ice);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Data flows up and dissolves into anonymity. Resources flow back down. Leadership sees the system; it never sees the person.</p>
+    <p class="slide-caption" style="text-align:center;font-style:italic;color:var(--ice);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Data flows up and dissolves into anonymity. Resources flow back down. Leadership sees the system; it never sees the person.</p>
+  </section>
+
+  <!-- 5.5 PRODUCT DEMO -->
+  <section class="slide dark">
+    <h2>The experience, inside the tab</h2>
+    <div class="demo-grid">
+      <div class="demo-left">
+        <div class="demo-label">Personal agent — mobile</div>
+        <div class="demo-screen">
+          <img src="demo-mobile.jpeg" alt="Agent task cards on mobile">
+        </div>
+      </div>
+      <div class="demo-right">
+        <div>
+          <div class="demo-label">Agent pipeline — desktop</div>
+          <div class="demo-screen">
+            <img src="demo-pipeline.jpeg" alt="Agent task pipeline on desktop">
+          </div>
+        </div>
+        <div>
+          <div class="demo-label">Meeting prep — one tap</div>
+          <div class="demo-screen">
+            <img src="demo-chat.jpeg" alt="AI meeting prep assistant">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- 6 DIFFERENTIATION -->
@@ -264,7 +341,7 @@
         </ul>
       </div>
     </div>
-    <p style="text-align:center;font-style:italic;color:var(--mute);margin-top:2.5vh;font-size:clamp(13px,1.4vw,16px)">Our axis isn't “who do we monitor” — it's “how do we remove the load that pushes the employee out the door in the first place.”</p>
+    <p class=”slide-caption” style=”text-align:center;font-style:italic;color:var(--mute);margin-top:2.5vh;font-size:clamp(13px,1.4vw,16px)”>Our axis isn't “who do we monitor” — it's “how do we remove the load that pushes the employee out the door in the first place.”</p>
   </section>
 
   <!-- 7 TRACTION -->
@@ -279,7 +356,7 @@
       <div class="sig">Selected for <b>Cerebral Valley's</b> 24-hr Physical AI cohort, Paris — Tech Week, July 2026.</div>
       <div class="sig">Author of <b>“Adaptive Human Infrastructure for AI-Native Environments,”</b> submitted to Israel's Innovation Authority consultation.</div>
     </div>
-    <p style="text-align:center;font-style:italic;color:var(--teal);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Solo founder + a live national-BPO pilot beats a two-person team with an idea.</p>
+    <p class="slide-caption" style="text-align:center;font-style:italic;color:var(--teal);margin-top:3vh;font-size:clamp(14px,1.5vw,17px)">Solo founder + a live national-BPO pilot beats a two-person team with an idea.</p>
   </section>
 
   <!-- 8 FOUNDER -->
@@ -289,7 +366,7 @@
       <p class="pt"><b class="teal">I didn't study this problem — I lived it.</b> A decade of CBT practice specializing in executive function, watching the gap between knowing what to do and being able to start. TAB@Work is that clinical insight turned into enterprise infrastructure — built bottom-up from the human, before the industry had the vocabulary for it.</p>
       <p class="muted" style="margin-top:14px;font-size:14px;line-height:1.4">I work in both registers — the neuroscience of cognitive load and the system architecture that addresses it. Solo founder by design; Ira Dotan supports legal &amp; regulatory and steps into a formal role as the stage justifies it.</p>
     </div>
-    <h3 style="margin-top:3vh;font-size:clamp(17px,1.9vw,22px)">Next 6 months</h3>
+    <h3 class="slide-h3" style="margin-top:3vh;font-size:clamp(17px,1.9vw,22px)">Next 6 months</h3>
     <div class="goals">
       <div class="goal">Convert the Tikshoov pilot into a paid contract + referenceable case study.</div>
       <div class="goal">Ship the core product: personal agents + the anonymous Weather Report.</div>
@@ -313,8 +390,8 @@
   <section class="slide dark">
     <div class="close-body" style="margin-top:16vh">
       <h1 style="font-size:clamp(30px,4.4vw,52px)">Every company will run on AI.</h1>
-      <p class="ice" style="font-size:clamp(17px,2.1vw,24px);margin-top:20px;line-height:1.35;max-width:30em">TAB@Work is the layer that makes it humane, governed, and safe — for the employee and the enterprise at once.</p>
-      <p class="teal" style="font-style:italic;margin-top:22px;font-size:clamp(15px,1.7vw,19px)">The problem was never the technology. It's the human condition. The solution is, literally, in their hands.</p>
+      <p class="ice slide-sub-large" style="font-size:clamp(17px,2.1vw,24px);margin-top:20px;line-height:1.35;max-width:30em">TAB@Work is the layer that makes it humane, governed, and safe — for the employee and the enterprise at once.</p>
+      <p class="teal slide-tagline" style="font-style:italic;margin-top:22px;font-size:clamp(15px,1.7vw,19px)">The problem was never the technology. It's the human condition. The solution is, literally, in their hands.</p>
     </div>
     <div class="contact">
       <a href="mailto:danya@dynamicbridge.io">danya@dynamicbridge.io</a>
